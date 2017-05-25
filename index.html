@@ -323,7 +323,38 @@ Additionally use the <code>Accept:application/json</code> Headers for every API 
 customer_id=&lt;value&gt;&amp;has_subreseller_id=&lt;value&gt;&amp;subreseller_id=&lt;value&gt;&amp;email=&lt;value&gt;&amp;first_name=&lt;values&gt;&amp;last_name=&lt;value&gt;&amp;zipcode=&lt;value&gt;&amp;same_billing_address=&lt;value&gt;&amp;billing_address=&lt;value&gt;&amp;billing_zipcode=&lt;value&gt;"</span>
   -H <span class="s2">"Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2"</span>
   -H <span class="s2">"Accept:application/json"</span>
-</code></pre><pre class="highlight php tab-php"><code>
+</code></pre><pre class="highlight php tab-php"><code>// Set api url
+$apiUrl = 'http://local.websales-api.nexogy.com/api/residential/client';
+// Start cURL
+$c = curl_init();
+curl_setopt($c, CURLOPT_CONNECTTIMEOUT, 5);
+curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+
+// Populate array with parameters
+$data['email'] = 'example@mail.com';
+$data['first_name'] = 'John';
+$data['last_name'] = 'Doe';
+$data['zipcode'] = '12345';
+$data['address'] = 'Client address';
+$data['sameBillingAddress'] = 1;
+$data['has_subreseller_id'] = 1;
+$data['subreseller_id'] = '123';
+
+// Set up headers
+$request_headers = array();
+$request_headers[] = 'Authorization: Bearer '. $access_token;
+$request_headers[] = 'Accept: application/json';
+curl_setopt($c, CURLOPT_HTTPHEADER, $request_headers);
+
+// Setup the remainder of the cURL request
+curl_setopt($c, CURLOPT_URL, $apiUrl);
+curl_setopt($c, CURLOPT_POST, true);
+curl_setopt($c, CURLOPT_POSTFIELDS, http_build_query($data));
+
+// Execute the API call and return the response
+$result = curl_exec($c);
+curl_close($c);
+
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -427,7 +458,26 @@ Remember — store your <code>&lt;id&gt;</code> and <code>&lt;ns_domain&gt;</cod
 <pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://staging.api.nexogy.com/api/residential/client/&lt;id&gt;/activate"</span>
   -H <span class="s2">"Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2"</span>
   -H <span class="s2">"Accept:application/json"</span>
-</code></pre><pre class="highlight php tab-php"><code>
+</code></pre><pre class="highlight php tab-php"><code>// Set api url
+$apiUrl = 'http://local.websales-api.nexogy.com/api/residential/client/id/activate';
+// Start cURL
+$c = curl_init();
+curl_setopt($c, CURLOPT_CONNECTTIMEOUT, 5);
+curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+
+// Set up headers
+$request_headers = array();
+$request_headers[] = 'Authorization: Bearer '. $access_token;
+$request_headers[] = 'Accept: application/json';
+curl_setopt($c, CURLOPT_HTTPHEADER, $request_headers);
+
+// Setup the remainder of the cURL request
+curl_setopt($c, CURLOPT_URL, $apiUrl);
+curl_setopt($c, CURLOPT_POST, true);
+
+// Execute the API call and return the response
+$result = curl_exec($c);
+curl_close($c);
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -463,7 +513,26 @@ Remember — store your <code>&lt;id&gt;</code> and <code>&lt;ns_domain&gt;</cod
 <pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://staging.api.nexogy.com/api/residential/client/&lt;id&gt;/suspend"</span>
   -H <span class="s2">"Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2"</span>
   -H <span class="s2">"Accept:application/json"</span>
-</code></pre><pre class="highlight php tab-php"><code>
+</code></pre><pre class="highlight php tab-php"><code>// Set api url
+$apiUrl = 'http://local.websales-api.nexogy.com/api/residential/client/id/suspend';
+// Start cURL
+$c = curl_init();
+curl_setopt($c, CURLOPT_CONNECTTIMEOUT, 5);
+curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+
+// Set up headers
+$request_headers = array();
+$request_headers[] = 'Authorization: Bearer '. $access_token;
+$request_headers[] = 'Accept: application/json';
+curl_setopt($c, CURLOPT_HTTPHEADER, $request_headers);
+
+// Setup the remainder of the cURL request
+curl_setopt($c, CURLOPT_URL, $apiUrl);
+curl_setopt($c, CURLOPT_POST, true);
+
+// Execute the API call and return the response
+$result = curl_exec($c);
+curl_close($c);
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
