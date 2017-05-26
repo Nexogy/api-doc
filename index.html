@@ -265,7 +265,7 @@
 <p>To authorize, use this code:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"http://staging.api.nexogy.com/api/oauth/token?grant_type=password&amp;client_id=&lt;value&gt;&amp;client_secret=&lt;value&gt;&amp;username=&lt;value&gt;&amp;password=&lt;value&gt;&amp;scope=&lt;value&gt;"</span>
+curl <span class="s2">"https://staging.api.nexogy.com/api/oauth/token?grant_type=password&amp;client_id=&lt;value&gt;&amp;client_secret=&lt;value&gt;&amp;username=&lt;value&gt;&amp;password=&lt;value&gt;&amp;scope=&lt;value&gt;"</span>
   -H <span class="s2">"Accept: application/json"</span>
 </code></pre><pre class="highlight php tab-php"><code>
 </code></pre>
@@ -343,11 +343,43 @@ Additionally use the <code>Accept:application/json</code> Headers for every API 
 <blockquote>
 <p>To Create a new client, use this code:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://staging.api.nexogy.com/api/residential/client?start_billing_date=&lt;value&gt;&amp;
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://staging.api.nexogy.com/api/residential/client?start_billing_date=&lt;value&gt;&amp;
 customer_id=&lt;value&gt;&amp;has_subreseller_id=&lt;value&gt;&amp;subreseller_id=&lt;value&gt;&amp;email=&lt;value&gt;&amp;first_name=&lt;values&gt;&amp;last_name=&lt;value&gt;&amp;zipcode=&lt;value&gt;&amp;same_billing_address=&lt;value&gt;&amp;billing_address=&lt;value&gt;&amp;billing_zipcode=&lt;value&gt;"</span>
   -H <span class="s2">"Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2"</span>
   -H <span class="s2">"Accept:application/json"</span>
-</code></pre><pre class="highlight php tab-php"><code>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?</span>
+<span class="c1">// Set api url
+</span><span class="nv">$apiUrl</span> <span class="o">=</span> <span class="s1">'https://staging.api.nexogy.com/api/residential/client'</span><span class="p">;</span>
+<span class="c1">// Start cURL
+</span><span class="nv">$c</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_CONNECTTIMEOUT</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+<span class="c1">// Populate array with parameters
+</span><span class="nv">$data</span><span class="p">[</span><span class="s1">'email'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'example@mail.com'</span><span class="p">;</span>
+<span class="nv">$data</span><span class="p">[</span><span class="s1">'first_name'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'John'</span><span class="p">;</span>
+<span class="nv">$data</span><span class="p">[</span><span class="s1">'last_name'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Doe'</span><span class="p">;</span>
+<span class="nv">$data</span><span class="p">[</span><span class="s1">'zipcode'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'12345'</span><span class="p">;</span>
+<span class="nv">$data</span><span class="p">[</span><span class="s1">'address'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Client address'</span><span class="p">;</span>
+<span class="nv">$data</span><span class="p">[</span><span class="s1">'sameBillingAddress'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="nv">$data</span><span class="p">[</span><span class="s1">'has_subreseller_id'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="nv">$data</span><span class="p">[</span><span class="s1">'subreseller_id'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'123'</span><span class="p">;</span>
+
+<span class="c1">// Set up headers
+</span><span class="nv">$request_headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+<span class="nv">$request_headers</span><span class="p">[]</span> <span class="o">=</span> <span class="s1">'Authorization: Bearer '</span><span class="o">.</span> <span class="nv">$access_token</span><span class="p">;</span>
+<span class="nv">$request_headers</span><span class="p">[]</span> <span class="o">=</span> <span class="s1">'Accept: application/json'</span><span class="p">;</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_HTTPHEADER</span><span class="p">,</span> <span class="nv">$request_headers</span><span class="p">);</span>
+
+<span class="c1">// Setup the remainder of the cURL request
+</span><span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_URL</span><span class="p">,</span> <span class="nv">$apiUrl</span><span class="p">);</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_POST</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_POSTFIELDS</span><span class="p">,</span> <span class="nb">http_build_query</span><span class="p">(</span><span class="nv">$data</span><span class="p">));</span>
+
+<span class="c1">// Execute the API call and return the response
+</span><span class="nv">$result</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$c</span><span class="p">);</span>
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$c</span><span class="p">);</span>
+<span class="cp">?&gt;</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -367,7 +399,7 @@ customer_id=&lt;value&gt;&amp;has_subreseller_id=&lt;value&gt;&amp;subreseller_i
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST http://staging.api.nexogy.com/api/residential/client?start_billing_date=&lt;value&gt;&amp;
+<p><code class="prettyprint">POST https://staging.api.nexogy.com/api/residential/client?start_billing_date=&lt;value&gt;&amp;
 customer_id=&lt;value&gt;&amp;has_subreseller_id=&lt;value&gt;&amp;subreseller_id=&lt;value&gt;&amp;email=&lt;value&gt;&amp;first_name=&lt;values&gt;&amp;last_name=&lt;value&gt;&amp;zipcode=&lt;value&gt;&amp;same_billing_address=&lt;value&gt;&amp;billing_address=&lt;value&gt;&amp;billing_zipcode=&lt;value&gt;</code></p>
 
 <h3 id="query-parameters">Query Parameters</h3>
@@ -448,10 +480,32 @@ Remember — store your <code>&lt;id&gt;</code> and <code>&lt;ns_domain&gt;</cod
 </aside>
 
 <h2 id="activate-a-client">Activate a Client</h2>
-<pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://staging.api.nexogy.com/api/residential/client/&lt;id&gt;/activate"</span>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://staging.api.nexogy.com/api/residential/client/&lt;id&gt;/activate"</span>
   -H <span class="s2">"Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2"</span>
   -H <span class="s2">"Accept:application/json"</span>
-</code></pre><pre class="highlight php tab-php"><code>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?</span>
+<span class="c1">// Set api url
+</span><span class="nv">$apiUrl</span> <span class="o">=</span> <span class="s1">'https://staging.api.nexogy.com/api/residential/client/id/activate'</span><span class="p">;</span>
+<span class="c1">// Start cURL
+</span><span class="nv">$c</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_CONNECTTIMEOUT</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+<span class="c1">// Set up headers
+</span><span class="nv">$request_headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+<span class="nv">$request_headers</span><span class="p">[]</span> <span class="o">=</span> <span class="s1">'Authorization: Bearer '</span><span class="o">.</span> <span class="nv">$access_token</span><span class="p">;</span>
+<span class="nv">$request_headers</span><span class="p">[]</span> <span class="o">=</span> <span class="s1">'Accept: application/json'</span><span class="p">;</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_HTTPHEADER</span><span class="p">,</span> <span class="nv">$request_headers</span><span class="p">);</span>
+
+<span class="c1">// Setup the remainder of the cURL request
+</span><span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_URL</span><span class="p">,</span> <span class="nv">$apiUrl</span><span class="p">);</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_POST</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+<span class="c1">// Execute the API call and return the response
+</span><span class="nv">$result</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$c</span><span class="p">);</span>
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$c</span><span class="p">);</span>
+<span class="cp">?&gt;</span>
+
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -460,6 +514,7 @@ Remember — store your <code>&lt;id&gt;</code> and <code>&lt;ns_domain&gt;</cod
  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
  </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1494597810</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre>
 <p>This endpoint activates a specific client.</p>
 
@@ -467,7 +522,7 @@ Remember — store your <code>&lt;id&gt;</code> and <code>&lt;ns_domain&gt;</cod
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST http://staging.api.nexogy.com/api/residential/client/&lt;id&gt;/activate</code></p>
+<p><code class="prettyprint">POST https://staging.api.nexogy.com/api/residential/client/&lt;id&gt;/activate</code></p>
 
 <h3 id="url-parameters">URL Parameters</h3>
 
@@ -484,10 +539,31 @@ Remember — store your <code>&lt;id&gt;</code> and <code>&lt;ns_domain&gt;</cod
 </tbody></table>
 
 <h2 id="suspend-a-client">Suspend a Client</h2>
-<pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://staging.api.nexogy.com/api/residential/client/&lt;id&gt;/suspend"</span>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://staging.api.nexogy.com/api/residential/client/&lt;id&gt;/suspend"</span>
   -H <span class="s2">"Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2"</span>
   -H <span class="s2">"Accept:application/json"</span>
-</code></pre><pre class="highlight php tab-php"><code>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?</span>
+<span class="c1">// Set api url
+</span><span class="nv">$apiUrl</span> <span class="o">=</span> <span class="s1">'https://staging.api.nexogy.com/api/residential/client/id/suspend'</span><span class="p">;</span>
+<span class="c1">// Start cURL
+</span><span class="nv">$c</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_CONNECTTIMEOUT</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+<span class="c1">// Set up headers
+</span><span class="nv">$request_headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+<span class="nv">$request_headers</span><span class="p">[]</span> <span class="o">=</span> <span class="s1">'Authorization: Bearer '</span><span class="o">.</span> <span class="nv">$access_token</span><span class="p">;</span>
+<span class="nv">$request_headers</span><span class="p">[]</span> <span class="o">=</span> <span class="s1">'Accept: application/json'</span><span class="p">;</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_HTTPHEADER</span><span class="p">,</span> <span class="nv">$request_headers</span><span class="p">);</span>
+
+<span class="c1">// Setup the remainder of the cURL request
+</span><span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_URL</span><span class="p">,</span> <span class="nv">$apiUrl</span><span class="p">);</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_POST</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+<span class="c1">// Execute the API call and return the response
+</span><span class="nv">$result</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$c</span><span class="p">);</span>
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$c</span><span class="p">);</span>
+<span class="cp">?&gt;</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -503,7 +579,7 @@ Remember — store your <code>&lt;id&gt;</code> and <code>&lt;ns_domain&gt;</cod
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST http://staging.api.nexogy.com/api/residential/client/&lt;id&gt;/suspend</code></p>
+<p><code class="prettyprint">POST https://staging.api.nexogy.com/api/residential/client/&lt;id&gt;/suspend</code></p>
 
 <h3 id="url-parameters">URL Parameters</h3>
 
