@@ -324,7 +324,7 @@ customer_id=&lt;value&gt;&amp;has_subreseller_id=&lt;value&gt;&amp;subreseller_i
   -H <span class="s2">"Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2"</span>
   -H <span class="s2">"Accept:application/json"</span>
 </code></pre><pre class="highlight php tab-php"><code>// Set api url
-$apiUrl = 'http://local.websales-api.nexogy.com/api/residential/client';
+$apiUrl = 'https://staging.api.nexogy.com/api/residential/client';
 // Start cURL
 $c = curl_init();
 curl_setopt($c, CURLOPT_CONNECTTIMEOUT, 5);
@@ -374,7 +374,7 @@ curl_close($c);
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST http://staging.api.nexogy.com/api/residential/client?start_billing_date=&lt;value&gt;&amp;
+<p><code class="prettyprint">POST https://staging.api.nexogy.com/api/residential/client?start_billing_date=&lt;value&gt;&amp;
 customer_id=&lt;value&gt;&amp;has_subreseller_id=&lt;value&gt;&amp;subreseller_id=&lt;value&gt;&amp;email=&lt;value&gt;&amp;first_name=&lt;values&gt;&amp;last_name=&lt;value&gt;&amp;zipcode=&lt;value&gt;&amp;same_billing_address=&lt;value&gt;&amp;billing_address=&lt;value&gt;&amp;billing_zipcode=&lt;value&gt;</code></p>
 
 <h3 id="query-parameters">Query Parameters</h3>
@@ -455,11 +455,11 @@ Remember — store your <code>&lt;id&gt;</code> and <code>&lt;ns_domain&gt;</cod
 </aside>
 
 <h2 id="activate-a-client">Activate a Client</h2>
-<pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://staging.api.nexogy.com/api/residential/client/&lt;id&gt;/activate"</span>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://staging.api.nexogy.com/api/residential/client/&lt;id&gt;/activate"</span>
   -H <span class="s2">"Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2"</span>
   -H <span class="s2">"Accept:application/json"</span>
 </code></pre><pre class="highlight php tab-php"><code>// Set api url
-$apiUrl = 'http://local.websales-api.nexogy.com/api/residential/client/id/activate';
+$apiUrl = 'https://staging.api.nexogy.com/api/residential/client/id/activate';
 // Start cURL
 $c = curl_init();
 curl_setopt($c, CURLOPT_CONNECTTIMEOUT, 5);
@@ -510,11 +510,11 @@ curl_close($c);
 </tbody></table>
 
 <h2 id="suspend-a-client">Suspend a Client</h2>
-<pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://staging.api.nexogy.com/api/residential/client/&lt;id&gt;/suspend"</span>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://staging.api.nexogy.com/api/residential/client/&lt;id&gt;/suspend"</span>
   -H <span class="s2">"Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2"</span>
   -H <span class="s2">"Accept:application/json"</span>
 </code></pre><pre class="highlight php tab-php"><code>// Set api url
-$apiUrl = 'http://local.websales-api.nexogy.com/api/residential/client/id/suspend';
+$apiUrl = 'https://staging.api.nexogy.com/api/residential/client/id/suspend';
 // Start cURL
 $c = curl_init();
 curl_setopt($c, CURLOPT_CONNECTTIMEOUT, 5);
@@ -566,7 +566,7 @@ curl_close($c);
 
           <h1 id="errors">Errors</h1>
 
-<aside class="notice">This errors have evolved with the API and businees requirements verify your errors frequently</aside>
+<aside class="notice">These errors have evolved with the API&rsquo;s and business&rsquo; requirements. Verify these errors frequently</aside>
 
 <p>The DNA API uses the following error codes:</p>
 
@@ -598,7 +598,7 @@ curl_close($c);
 </tr>
 <tr>
 <td>406</td>
-<td>Not Acceptable – You requested a format that isn’t valid parameter or is not validated.</td>
+<td>Not Acceptable – You requested an invalid parameter or your parameters are not validated.</td>
 </tr>
 <tr>
 <td>410</td>
