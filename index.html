@@ -595,6 +595,155 @@ Remember — store your <code>&lt;id&gt;</code> and <code>&lt;ns_domain&gt;</cod
 </tr>
 </tbody></table>
 
+<h2 id="get-status">Get Status</h2>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://staging.api.nexogy.com/api/residential/domain/&lt;domain&gt;"</span>
+  -H <span class="s2">"Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2"</span>
+  -H <span class="s2">"Accept:application/json"</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?</span>
+<span class="c1">// Set api url
+</span><span class="nv">$apiUrl</span> <span class="o">=</span> <span class="s1">'https://staging.api.nexogy.com/api/residential/domain/&lt;domain&gt;'</span><span class="p">;</span>
+<span class="c1">// Start cURL
+</span><span class="nv">$c</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_CONNECTTIMEOUT</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+<span class="c1">// Set up headers
+</span><span class="nv">$request_headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+<span class="nv">$request_headers</span><span class="p">[]</span> <span class="o">=</span> <span class="s1">'Authorization: Bearer '</span><span class="o">.</span> <span class="nv">$access_token</span><span class="p">;</span>
+<span class="nv">$request_headers</span><span class="p">[]</span> <span class="o">=</span> <span class="s1">'Accept: application/json'</span><span class="p">;</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_HTTPHEADER</span><span class="p">,</span> <span class="nv">$request_headers</span><span class="p">);</span>
+
+<span class="c1">// Setup the remainder of the cURL request
+</span><span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_URL</span><span class="p">,</span> <span class="nv">$apiUrl</span><span class="p">);</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_POST</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+<span class="c1">// Execute the API call and return the response
+</span><span class="nv">$result</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$c</span><span class="p">);</span>
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$c</span><span class="p">);</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1496259363</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint gets the status of a domain. Status are locked or active</p>
+
+<aside class="warning">You will need the <code>&lt;domain&gt;</code> for this operation</aside>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://staging.api.nexogy.com/api/residential/domain/&lt;domain&gt;</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>domain</td>
+<td>The domain name of the client.</td>
+</tr>
+</tbody></table>
+
+<h1 id="device">Device</h1>
+
+<p>Once a Client is Created a default device is created, additional devices may be created later, with the device method.</p>
+
+<h2 id="device-method">Device method</h2>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://staging.api.nexogy.com/api/residential/device?client_id=&lt;value&gt;&amp;
+domain=&lt;value&gt;&amp;extension=&lt;value&gt;"</span>
+  -H <span class="s2">"Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2"</span>
+  -H <span class="s2">"Accept:application/json"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+ </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+ </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+   </span><span class="s2">"subscriber_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1012"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"aor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sip:1012@kirkhammet.com"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"domain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kirkhammet.com"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"authentication_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oqyx0245"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"regservers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+     </span><span class="s2">"server1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+       </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mians01.nexogy.net"</span><span class="p">,</span><span class="w">
+       </span><span class="s2">"port"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5092"</span><span class="w">
+     </span><span class="p">},</span><span class="w">
+     </span><span class="s2">"server2"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+       </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mians02.nexogy.net"</span><span class="p">,</span><span class="w">
+       </span><span class="s2">"port"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5092"</span><span class="w">
+     </span><span class="p">}</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1496682921</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>The Device method behaves different according to the parameters it receives.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://staging.api.nexogy.com/api/residential/device?client_id=&lt;value&gt;&amp;
+domain=&lt;value&gt;&amp;extension=&lt;value&gt;</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>client_id</td>
+<td>The client ID of the requested device. You get this information whe the client was created.</td>
+</tr>
+<tr>
+<td>domain</td>
+<td>The domain you received when the client was created.</td>
+</tr>
+<tr>
+<td>extension</td>
+<td>This parameter is optional. This is the extension of the customer&rsquo;s device. If no device is sent the default extension is created, in this case extension=1000 and the device information is returned. If a number is sent in this parameter and the device exists this method returns device information. If a number is sent and the device doesn&rsquo;t exist, that device for that extension is created.</td>
+</tr>
+</tbody></table>
+
+<h3 id="json-response">JSON Response</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>subscriber_name</td>
+<td>The Devices extension number.</td>
+</tr>
+<tr>
+<td>aor</td>
+<td>The identifier of device and The domain.</td>
+</tr>
+<tr>
+<td>authentication_key</td>
+<td>The SIP password for the device.</td>
+</tr>
+<tr>
+<td>regservers</td>
+<td>an array with the available registration servers and ports, this is required for your configuration.</td>
+</tr>
+</tbody></table>
+
           <h1 id="errors">Errors</h1>
 
 <aside class="notice">These errors have evolved with the API&rsquo;s and business&rsquo; requirements. Verify these errors frequently</aside>
