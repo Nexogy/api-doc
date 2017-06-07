@@ -677,11 +677,11 @@ domain=&lt;value&gt;&amp;extension=&lt;value&gt;"</span>
    </span><span class="s2">"authentication_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oqyx0245"</span><span class="p">,</span><span class="w">
    </span><span class="s2">"regservers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
      </span><span class="s2">"server1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-       </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mians01.nexogy.net"</span><span class="p">,</span><span class="w">
+       </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sandbox.nexogy.net"</span><span class="p">,</span><span class="w">
        </span><span class="s2">"port"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5092"</span><span class="w">
      </span><span class="p">},</span><span class="w">
      </span><span class="s2">"server2"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-       </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mians02.nexogy.net"</span><span class="p">,</span><span class="w">
+       </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sandbox.nexogy.net"</span><span class="p">,</span><span class="w">
        </span><span class="s2">"port"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5092"</span><span class="w">
      </span><span class="p">}</span><span class="w">
    </span><span class="p">},</span><span class="w">
@@ -736,13 +736,19 @@ domain=&lt;value&gt;&amp;extension=&lt;value&gt;</code></p>
 </tr>
 <tr>
 <td>authentication_key</td>
-<td>The SIP password for the device.</td>
+<td>The SIP password for the device. For security reasons we use gpg for encryption. You will recieve this parameter encrypted in Base 64 using gpg. With the Public Key you previously sent to us.</td>
 </tr>
 <tr>
 <td>regservers</td>
 <td>an array with the available registration servers and ports, this is required for your configuration.</td>
 </tr>
 </tbody></table>
+
+<p>Refer to this documentation in order to generate the key here:</p>
+
+<p><a href='https://help.github.com/articles/generating-a-new-gpg-key/'>Documentation for gpg</a></p>
+
+<aside class="warning">Send us the public key indicated in step 13 of the <code>gpg</code> documentation found above. For this operation.</aside>
 
           <h1 id="errors">Errors</h1>
 
