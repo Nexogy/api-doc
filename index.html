@@ -343,8 +343,8 @@ Additionally use the <code>Accept:application/json</code> Headers for every API 
 <blockquote>
 <p>To Create a new client, use this code:</p>
 </blockquote>
-<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://staging.api.nexogy.com/api/residential/client?start_billing_date=&lt;value&gt;&amp;
-customer_id=&lt;value&gt;&amp;has_subreseller_id=&lt;value&gt;&amp;subreseller_id=&lt;value&gt;&amp;email=&lt;value&gt;&amp;first_name=&lt;values&gt;&amp;last_name=&lt;value&gt;&amp;zipcode=&lt;value&gt;&amp;same_billing_address=&lt;value&gt;&amp;billing_address=&lt;value&gt;&amp;billing_zipcode=&lt;value&gt;"</span>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://staging.api.nexogy.com/api/residential/client?email=&lt;value&gt;&amp;
+first_name=&lt;value&gt;&amp;last_name=&lt;value&gt;&amp;zipcode=&lt;value&gt;&amp;address=&lt;value&gt;&amp;sameBillingAddress=&lt;values&gt;&amp;billing_zipcode=&lt;value&gt;&amp;billing_address=&lt;value&gt;&amp;has_subreseller_id=&lt;value&gt;&amp;subreseller_id=&lt;value&gt;&amp;start_billing_date=&lt;value&gt;&amp;did_porting=&lt;value&gt;&amp;did_number=&lt;value&gt;"</span>
   -H <span class="s2">"Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2"</span>
   -H <span class="s2">"Accept:application/json"</span>
 </code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?</span>
@@ -364,6 +364,10 @@ customer_id=&lt;value&gt;&amp;has_subreseller_id=&lt;value&gt;&amp;subreseller_i
 <span class="nv">$data</span><span class="p">[</span><span class="s1">'sameBillingAddress'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 <span class="nv">$data</span><span class="p">[</span><span class="s1">'has_subreseller_id'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 <span class="nv">$data</span><span class="p">[</span><span class="s1">'subreseller_id'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'123'</span><span class="p">;</span>
+<span class="nv">$data</span><span class="p">[</span><span class="s1">'billing_zipcode'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'12345'</span><span class="p">;</span>
+<span class="nv">$data</span><span class="p">[</span><span class="s1">'start_billing_date'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'06/08/2017'</span><span class="p">;</span>
+<span class="nv">$data</span><span class="p">[</span><span class="s1">'did_porting'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="nv">$data</span><span class="p">[</span><span class="s1">'did_number'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'3052304777'</span><span class="p">;</span>
 
 <span class="c1">// Set up headers
 </span><span class="nv">$request_headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
@@ -384,23 +388,22 @@ customer_id=&lt;value&gt;&amp;has_subreseller_id=&lt;value&gt;&amp;subreseller_i
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"result"</span><span class="p">:</span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"client"</span><span class="p">:</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="mi">6519</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"ns_domain"</span><span class="p">:</span><span class="s2">"ironmaiden.com"</span><span class="p">,</span><span class="w">
-      </span><span class="p">}</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"client"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">92769</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ns_domain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kerryking2.com"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint creates a Client on DNA. You will get back a <code>id</code> and a <code>ns_domain</code> these will be required for other operations. </p>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST https://staging.api.nexogy.com/api/residential/client?start_billing_date=&lt;value&gt;&amp;
-customer_id=&lt;value&gt;&amp;has_subreseller_id=&lt;value&gt;&amp;subreseller_id=&lt;value&gt;&amp;email=&lt;value&gt;&amp;first_name=&lt;values&gt;&amp;last_name=&lt;value&gt;&amp;zipcode=&lt;value&gt;&amp;same_billing_address=&lt;value&gt;&amp;billing_address=&lt;value&gt;&amp;billing_zipcode=&lt;value&gt;</code></p>
+<p><code class="prettyprint">POST https://staging.api.nexogy.com/api/residential/client?email=&lt;value&gt;&amp;
+first_name=&lt;value&gt;&amp;last_name=&lt;value&gt;&amp;zipcode=&lt;value&gt;&amp;address=&lt;value&gt;&amp;sameBillingAddress=&lt;values&gt;&amp;billing_zipcode=&lt;value&gt;&amp;billing_address=&lt;value&gt;&amp;has_subreseller_id=&lt;value&gt;&amp;subreseller_id=&lt;value&gt;&amp;start_billing_date=&lt;value&gt;&amp;did_porting=&lt;value&gt;&amp;did_number=&lt;value&gt;</code></p>
 
 <h3 id="query-parameters">Query Parameters</h3>
 
@@ -415,8 +418,8 @@ customer_id=&lt;value&gt;&amp;has_subreseller_id=&lt;value&gt;&amp;subreseller_i
 </thead><tbody>
 <tr>
 <td>start_billing_date</td>
-<td>2017-05-18</td>
-<td>Date in  YYYY-MM-DD Format for Billing purposes</td>
+<td>05/29/2017</td>
+<td>Date in  MM/DD/YYYY Format for Billing purposes</td>
 </tr>
 <tr>
 <td>customer_id</td>
@@ -425,8 +428,8 @@ customer_id=&lt;value&gt;&amp;has_subreseller_id=&lt;value&gt;&amp;subreseller_i
 </tr>
 <tr>
 <td>has_subreseller_id</td>
-<td>true</td>
-<td>This is an id used to group your cleint&rsquo;s IDs under a subreseller account if you have resellers that handle your clients this is how we would identify them for consolidation purposes.</td>
+<td>1</td>
+<td>This is an id used to group your client&rsquo;s IDs under a subreseller account if you have resellers that handle your clients this is how we would identify them for consolidation purposes. Accepts 1 or 0.</td>
 </tr>
 <tr>
 <td>subreseller_id</td>
@@ -459,9 +462,9 @@ customer_id=&lt;value&gt;&amp;has_subreseller_id=&lt;value&gt;&amp;subreseller_i
 <td>The client&rsquo;s address.</td>
 </tr>
 <tr>
-<td>same_billing_address</td>
-<td>true</td>
-<td>Accepts true or false and determines if the address parameter will be used for billing, when false <code>billing_address</code> and <code>billing_zipcode</code> are required.</td>
+<td>sameBillingAddress</td>
+<td>1</td>
+<td>Accepts 1 or 0 and determines if the address parameter will be used for billing, when 0 <code>billing_address</code> and <code>billing_zipcode</code> are required.</td>
 </tr>
 <tr>
 <td>billing_address</td>
@@ -472,6 +475,16 @@ customer_id=&lt;value&gt;&amp;has_subreseller_id=&lt;value&gt;&amp;subreseller_i
 <td>billing_zipcode</td>
 <td>33308</td>
 <td>The billing zipcode.</td>
+</tr>
+<tr>
+<td>did_porting</td>
+<td>0</td>
+<td>Acepts 1 or 0 depending on if the did_number you are providing is ported or no.</td>
+</tr>
+<tr>
+<td>did_number</td>
+<td>3052304999</td>
+<td>Main phone number for the client.</td>
 </tr>
 </tbody></table>
 
@@ -511,12 +524,14 @@ Remember — store your <code>&lt;id&gt;</code> and <code>&lt;ns_domain&gt;</cod
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
- </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
- </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1494597810</span><span class="w">
+  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1496930642</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre>
-<p>This endpoint activates a specific client.</p>
+<p>This endpoint activates a specific client. If the client was previously cancelled, it activates the client on Netsapiens and sets the billing_status to active on DNA.</p>
 
 <aside class="warning">You will need the <code>&lt;id&gt;</code> for this operation</aside>
 
@@ -569,11 +584,13 @@ Remember — store your <code>&lt;id&gt;</code> and <code>&lt;ns_domain&gt;</cod
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
- </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
- </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1494597810</span><span class="w">
+  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1496940922</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint suspends a Client.</p>
+<p>This endpoint suspends a Client. It just locked the client on Netsapiens. This is different from the cancel endpoint.</p>
 
 <aside class="warning">You will need the <code>&lt;id&gt;</code> for this operation</aside>
 
@@ -595,13 +612,13 @@ Remember — store your <code>&lt;id&gt;</code> and <code>&lt;ns_domain&gt;</cod
 </tr>
 </tbody></table>
 
-<h2 id="get-status">Get Status</h2>
-<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://staging.api.nexogy.com/api/residential/domain/&lt;domain&gt;"</span>
+<h2 id="cancel-a-client">Cancel a Client</h2>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://staging.api.nexogy.com/api/residential/client/&lt;id&gt;/cancel"</span>
   -H <span class="s2">"Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2"</span>
   -H <span class="s2">"Accept:application/json"</span>
 </code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?</span>
 <span class="c1">// Set api url
-</span><span class="nv">$apiUrl</span> <span class="o">=</span> <span class="s1">'https://staging.api.nexogy.com/api/residential/domain/&lt;domain&gt;'</span><span class="p">;</span>
+</span><span class="nv">$apiUrl</span> <span class="o">=</span> <span class="s1">'https://staging.api.nexogy.com/api/residential/client/id/cancel'</span><span class="p">;</span>
 <span class="c1">// Start cURL
 </span><span class="nv">$c</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
 <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_CONNECTTIMEOUT</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
@@ -628,6 +645,64 @@ Remember — store your <code>&lt;id&gt;</code> and <code>&lt;ns_domain&gt;</cod
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1496931834</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint cancels a Client. It performs two operations, first suspends the client domain on Netsapiens and then set the billing_status of the client to suspended.</p>
+
+<aside class="warning">You will need the <code>&lt;id&gt;</code> for this operation</aside>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://staging.api.nexogy.com/api/residential/client/&lt;id&gt;/cancel</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>The ID of the client to cancel, the one we sent you when the client was created</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-status">Get Status</h2>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://staging.api.nexogy.com/api/residential/domain/&lt;domain&gt;"</span>
+  -H <span class="s2">"Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2"</span>
+  -H <span class="s2">"Accept:application/json"</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?</span>
+<span class="c1">// Set api url
+</span><span class="nv">$apiUrl</span> <span class="o">=</span> <span class="s1">'https://staging.api.nexogy.com/api/residential/domain/&lt;domain&gt;'</span><span class="p">;</span>
+<span class="c1">// Start cURL
+</span><span class="nv">$c</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_CONNECTTIMEOUT</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+<span class="c1">// Set up headers
+</span><span class="nv">$request_headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+<span class="nv">$request_headers</span><span class="p">[]</span> <span class="o">=</span> <span class="s1">'Authorization: Bearer '</span><span class="o">.</span> <span class="nv">$access_token</span><span class="p">;</span>
+<span class="nv">$request_headers</span><span class="p">[]</span> <span class="o">=</span> <span class="s1">'Accept: application/json'</span><span class="p">;</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_HTTPHEADER</span><span class="p">,</span> <span class="nv">$request_headers</span><span class="p">);</span>
+
+<span class="c1">// Setup the remainder of the cURL request
+</span><span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_URL</span><span class="p">,</span> <span class="nv">$apiUrl</span><span class="p">);</span>
+
+<span class="c1">// Execute the API call and return the response
+</span><span class="nv">$result</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$c</span><span class="p">);</span>
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$c</span><span class="p">);</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1496259363</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -639,7 +714,7 @@ Remember — store your <code>&lt;id&gt;</code> and <code>&lt;ns_domain&gt;</cod
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST https://staging.api.nexogy.com/api/residential/domain/&lt;domain&gt;</code></p>
+<p><code class="prettyprint">GET https://staging.api.nexogy.com/api/residential/domain/&lt;domain&gt;</code></p>
 
 <h3 id="url-parameters">URL Parameters</h3>
 
@@ -655,46 +730,133 @@ Remember — store your <code>&lt;id&gt;</code> and <code>&lt;ns_domain&gt;</cod
 </tr>
 </tbody></table>
 
-<h1 id="device">Device</h1>
-
-<p>Once a Client is Created a default device is created, additional devices may be created later, with the device method.</p>
-
-<h2 id="device-method">Device method</h2>
-<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://staging.api.nexogy.com/api/residential/device?client_id=&lt;value&gt;&amp;
-domain=&lt;value&gt;&amp;extension=&lt;value&gt;"</span>
+<h2 id="update">Update</h2>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://staging.api.nexogy.com/api/residential/client/&lt;id&gt;"</span>
   -H <span class="s2">"Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2"</span>
   -H <span class="s2">"Accept:application/json"</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?</span>
+<span class="c1">// Set api url
+</span><span class="nv">$apiUrl</span> <span class="o">=</span> <span class="s1">'https://staging.api.nexogy.com/api/residential/client/&lt;id&gt;'</span><span class="p">;</span>
+<span class="c1">// Start cURL
+</span><span class="nv">$c</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_CONNECTTIMEOUT</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+<span class="c1">// Populate array with parameters
+</span><span class="nv">$data</span><span class="p">[</span><span class="s1">'start_billing_date'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'06/08/2017'</span><span class="p">;</span>
+
+<span class="c1">// Set up headers
+</span><span class="nv">$request_headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+<span class="nv">$request_headers</span><span class="p">[]</span> <span class="o">=</span> <span class="s1">'Authorization: Bearer '</span><span class="o">.</span> <span class="nv">$access_token</span><span class="p">;</span>
+<span class="nv">$request_headers</span><span class="p">[]</span> <span class="o">=</span> <span class="s1">'Accept: application/json'</span><span class="p">;</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_HTTPHEADER</span><span class="p">,</span> <span class="nv">$request_headers</span><span class="p">);</span>
+
+<span class="c1">// Setup the remainder of the cURL request
+</span><span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_URL</span><span class="p">,</span> <span class="nv">$apiUrl</span><span class="p">);</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_POST</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_POSTFIELDS</span><span class="p">,</span> <span class="nb">http_build_query</span><span class="p">(</span><span class="nv">$data</span><span class="p">));</span>
+
+<span class="c1">// Execute the API call and return the response
+</span><span class="nv">$result</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$c</span><span class="p">);</span>
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$c</span><span class="p">);</span>
+<span class="cp">?&gt;</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
- </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
- </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-   </span><span class="s2">"subscriber_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1012"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"aor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sip:1012@kirkhammet.com"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"domain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kirkhammet.com"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"authentication_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oqyx0245"</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"regservers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-     </span><span class="s2">"server1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-       </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sandbox.nexogy.net"</span><span class="p">,</span><span class="w">
-       </span><span class="s2">"port"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5092"</span><span class="w">
-     </span><span class="p">},</span><span class="w">
-     </span><span class="s2">"server2"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-       </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sandbox.nexogy.net"</span><span class="p">,</span><span class="w">
-       </span><span class="s2">"port"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5092"</span><span class="w">
-     </span><span class="p">}</span><span class="w">
-   </span><span class="p">},</span><span class="w">
-   </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1496682921</span><span class="w">
- </span><span class="p">}</span><span class="w">
+  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1496941963</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>The Device method behaves different according to the parameters it receives.</p>
+<p>This endpoint updates the information of a client in DNA. For now it&rsquo;s only available for the start_billing_date field.</p>
+
+<aside class="warning">You will need the <code>&lt;id&gt;</code> for this operation</aside>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST https://staging.api.nexogy.com/api/residential/device?client_id=&lt;value&gt;&amp;
-domain=&lt;value&gt;&amp;extension=&lt;value&gt;</code></p>
+<p><code class="prettyprint">POST https://staging.api.nexogy.com/api/residential/client/&lt;id&gt;</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>start_billing_date</td>
+<td>06/08/2017</td>
+<td>Date in  MM/DD/YYYY Format for Billing purposes.</td>
+</tr>
+</tbody></table>
+
+<h1 id="device">Device</h1>
+
+<p>Once a Client is Created a default device is created, additional devices may be created later, with the device method.</p>
+
+<h2 id="device-method">Device method</h2>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://staging.api.nexogy.com/api/residential/device?client_id=&lt;value&gt;&amp;domain=&lt;value&gt;&amp;ext=&lt;value&gt;"</span>
+  -H <span class="s2">"Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2"</span>
+  -H <span class="s2">"Accept:application/json"</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?</span>
+<span class="c1">// Set api url
+</span><span class="nv">$apiUrl</span> <span class="o">=</span> <span class="s1">'https://staging.api.nexogy.com/api/residential/device'</span><span class="p">;</span>
+<span class="c1">// Start cURL
+</span><span class="nv">$c</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_CONNECTTIMEOUT</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+<span class="c1">// Populate array with parameters
+</span><span class="nv">$data</span><span class="p">[</span><span class="s1">'domain'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'06/08/tomaraya.com'</span><span class="p">;</span>
+<span class="nv">$data</span><span class="p">[</span><span class="s1">'client_id'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'12345'</span><span class="p">;</span>
+<span class="nv">$data</span><span class="p">[</span><span class="s1">'ext'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'1003'</span><span class="p">;</span>
+
+<span class="c1">// Set up headers
+</span><span class="nv">$request_headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+<span class="nv">$request_headers</span><span class="p">[]</span> <span class="o">=</span> <span class="s1">'Authorization: Bearer '</span><span class="o">.</span> <span class="nv">$access_token</span><span class="p">;</span>
+<span class="nv">$request_headers</span><span class="p">[]</span> <span class="o">=</span> <span class="s1">'Accept: application/json'</span><span class="p">;</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_HTTPHEADER</span><span class="p">,</span> <span class="nv">$request_headers</span><span class="p">);</span>
+
+<span class="c1">// Setup the remainder of the cURL request
+</span><span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_URL</span><span class="p">,</span> <span class="nv">$apiUrl</span><span class="p">);</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_POST</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_POSTFIELDS</span><span class="p">,</span> <span class="nb">http_build_query</span><span class="p">(</span><span class="nv">$data</span><span class="p">));</span>
+
+<span class="c1">// Execute the API call and return the response
+</span><span class="nv">$result</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$c</span><span class="p">);</span>
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$c</span><span class="p">);</span>
+<span class="cp">?&gt;</span>
+
+&gt; The above command returns JSON structured like this:
+
+```json
+{
+ "result": "OK",
+ "data": {
+   "subscriber_name": "1012",
+   "aor": "sip:1012@kirkhammet.com",
+   "domain": "kirkhammet.com",
+   "authentication_key": "encrypted key",
+   "regservers": {
+     "server1": {
+       "address": "sandbox.nexogy.net",
+       "port": "5092"
+     }
+   },
+   "timestamp": 1496682921
+ }
+}
+</code></pre>
+<p>The Device method behaves different according to the parameters it receives. You can pass the domain or the client_id, no need to pass both. If no ext is sent the default extension is created, in this case extension=1000 and the device information is returned. If a number is sent in this parameter and the device exists this method returns device information. If a number is sent and the device doesn&rsquo;t exist, that device for that extension is created.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://staging.api.nexogy.com/api/residential/device?client_id=&lt;value&gt;&amp;domain=&lt;value&gt;&amp;ext=&lt;value&gt;</code></p>
 
 <h3 id="url-parameters">URL Parameters</h3>
 
@@ -749,6 +911,108 @@ domain=&lt;value&gt;&amp;extension=&lt;value&gt;</code></p>
 <p><a href='https://help.github.com/articles/generating-a-new-gpg-key/'>Documentation for gpg</a></p>
 
 <aside class="warning">Send us the public key indicated in step 13 of the <code>gpg</code> documentation found above. For this operation.</aside>
+
+<h1 id="did">Did</h1>
+
+<h2 id="search-dids">Search Dids</h2>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://staging.api.nexogy.com/api/dids/search?npa=&lt;value&gt;&amp;state=&lt;value&gt;"</span>
+  -H <span class="s2">"Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2"</span>
+  -H <span class="s2">"Accept:application/json"</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?</span>
+<span class="c1">// Set api url
+</span><span class="nv">$apiUrl</span> <span class="o">=</span> <span class="s1">'https://staging.api.nexogy.com/api/dids/search'</span><span class="p">;</span>
+<span class="c1">// Start cURL
+</span><span class="nv">$c</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_CONNECTTIMEOUT</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+<span class="c1">// Populate array with parameters
+</span><span class="nv">$data</span><span class="p">[</span><span class="s1">'npa'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'305'</span><span class="p">;</span>
+<span class="nv">$data</span><span class="p">[</span><span class="s1">'state'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'FL'</span><span class="p">;</span>
+
+<span class="c1">// Set up headers
+</span><span class="nv">$request_headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+<span class="nv">$request_headers</span><span class="p">[]</span> <span class="o">=</span> <span class="s1">'Authorization: Bearer '</span><span class="o">.</span> <span class="nv">$access_token</span><span class="p">;</span>
+<span class="nv">$request_headers</span><span class="p">[]</span> <span class="o">=</span> <span class="s1">'Accept: application/json'</span><span class="p">;</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_HTTPHEADER</span><span class="p">,</span> <span class="nv">$request_headers</span><span class="p">);</span>
+
+<span class="c1">// Setup the remainder of the cURL request
+</span><span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_URL</span><span class="p">,</span> <span class="nv">$apiUrl</span><span class="p">);</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_POST</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_POSTFIELDS</span><span class="p">,</span> <span class="nb">http_build_query</span><span class="p">(</span><span class="nv">$data</span><span class="p">));</span>
+
+<span class="c1">// Execute the API call and return the response
+</span><span class="nv">$result</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$c</span><span class="p">);</span>
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$c</span><span class="p">);</span>
+<span class="cp">?&gt;</span>
+
+&gt; The above command returns JSON structured like this:
+
+```json
+{
+  "result": "OK",
+  "data": {
+    "return": {
+      "npas": {
+        "npa": "305"
+      },
+      "quantity": 6,
+      "consecutive": 1,
+      "result": {
+        "tn": [
+          {
+            "number": 3052304666,
+            "category": "Vanity"
+          },
+          {
+            "number": 3052304777,
+            "category": "Vanity"
+          },
+          {
+            "number": 3052304999,
+            "category": "Vanity"
+          },
+          {
+            "number": 3054344555,
+            "category": "Vanity"
+          },
+          {
+            "number": 3054344600,
+            "category": "Vanity"
+          },
+          {
+            "number": 3054344777,
+            "category": "Vanity"
+          }
+        ]
+      },
+      "tnCount": 6
+    }
+  }
+</code></pre>
+<p>This endpoit conducts a search by area code and state name and returns available did numbers to be used when creating a new client.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://staging.api.nexogy.com/api/dids/search?npa=&lt;value&gt;&amp;state=&lt;value&gt;</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>npa</td>
+<td>Area code of the desired number.</td>
+</tr>
+<tr>
+<td>state</td>
+<td>State of the desired number.</td>
+</tr>
+</tbody></table>
 
           <h1 id="errors">Errors</h1>
 
