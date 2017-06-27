@@ -1014,6 +1014,99 @@ Remember — store your <code>&lt;id&gt;</code> and <code>&lt;ns_domain&gt;</cod
 </tr>
 </tbody></table>
 
+<h2 id="provision-911-did">Provision 911 Did</h2>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://staging.api.nexogy.com/api/residential/e911?client_id=&lt;value&gt;&amp;address1=&lt;value&gt;&amp;address2=&lt;value&gt;&amp;city=&lt;value&gt;&amp;state=&lt;value&gt;&amp;zip=&lt;value&gt;&amp;force=&lt;value&gt;"</span>
+  -H <span class="s2">"Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2"</span>
+  -H <span class="s2">"Accept:application/json"</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?</span>
+<span class="c1">// Set api url
+</span><span class="nv">$apiUrl</span> <span class="o">=</span> <span class="s1">'https://staging.api.nexogy.com/api/residential/e911'</span><span class="p">;</span>
+<span class="c1">// Start cURL
+</span><span class="nv">$c</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_CONNECTTIMEOUT</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+<span class="c1">// Populate array with parameters
+</span><span class="nv">$data</span><span class="p">[</span><span class="s1">'client_id'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'6559'</span><span class="p">;</span>
+<span class="nv">$data</span><span class="p">[</span><span class="s1">'address1'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'1111 Somestreet st'</span><span class="p">;</span>
+<span class="nv">$data</span><span class="p">[</span><span class="s1">'address2'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+<span class="nv">$data</span><span class="p">[</span><span class="s1">'city'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'City;
+$data['</span><span class="nx">state</span><span class="s1">'] = '</span><span class="nx">ST</span><span class="s1">';
+$data['</span><span class="nx">zip</span><span class="s1">'] = '</span><span class="mi">33000</span><span class="s1">';
+$data['</span><span class="nx">force</span><span class="s1">'] = '</span><span class="mi">0</span><span class="s1">';
+
+// Set up headers
+$request_headers = array();
+$request_headers[] = '</span><span class="nx">Authorization</span><span class="o">:</span> <span class="nx">Bearer</span> <span class="s1">'. $access_token;
+$request_headers[] = '</span><span class="nx">Accept</span><span class="o">:</span> <span class="nx">application</span><span class="o">/</span><span class="nx">json</span><span class="err">'</span><span class="p">;</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_HTTPHEADER</span><span class="p">,</span> <span class="nv">$request_headers</span><span class="p">);</span>
+
+<span class="c1">// Setup the remainder of the cURL request
+</span><span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_URL</span><span class="p">,</span> <span class="nv">$apiUrl</span><span class="p">);</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_POST</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_POSTFIELDS</span><span class="p">,</span> <span class="nb">http_build_query</span><span class="p">(</span><span class="nv">$data</span><span class="p">));</span>
+
+<span class="c1">// Execute the API call and return the response
+</span><span class="nv">$result</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$c</span><span class="p">);</span>
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$c</span><span class="p">);</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1498572262</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoit sets the 911 address for the number associated to the client. Behind the scenes it has two layers of address validation, the first one using UPS API and the second one uses Bandwidth API. For the request to be successful it has to go through both layers. In case the address is not valid but the validation services have other options, they will be presented to the user with the message &ldquo;ambiguous address&rdquo;, so the user may select any of them. In case the validation services can&rsquo;t provide valid options, the user will get a message of &ldquo;invalid address&rdquo; and the action won&rsquo;t be completed.</p>
+
+<p>If the user wants to use an invalid address anyway, the parameter &ldquo;force&rdquo; have to be passed with value 1.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://staging.api.nexogy.com/api/residential/e911?client_id=&lt;value&gt;&amp;address1=&lt;value&gt;&amp;address2=&lt;value&gt;&amp;city=&lt;value&gt;&amp;state=&lt;value&gt;&amp;zip=&lt;value&gt;&amp;force=&lt;value&gt;</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>client_id</td>
+<td>The client ID. You get this information whe the client was created. This parameter is required.</td>
+</tr>
+<tr>
+<td>addres1</td>
+<td>Street address. This parameter is required.</td>
+</tr>
+<tr>
+<td>addres2</td>
+<td>Second line of street address. This parameter is not required.</td>
+</tr>
+<tr>
+<td>city</td>
+<td>City name. This parameter is required.</td>
+</tr>
+<tr>
+<td>state</td>
+<td>State name. This parameter is required.</td>
+</tr>
+<tr>
+<td>zip</td>
+<td>Zipcode. This parameter is required.</td>
+</tr>
+<tr>
+<td>force</td>
+<td>Wheter the address will be forced or not (1 or 0). This parameter is not required.</td>
+</tr>
+</tbody></table>
+
           <h1 id="errors">Errors</h1>
 
 <aside class="notice">These errors have evolved with the API&rsquo;s and business&rsquo; requirements. Verify these errors frequently</aside>
