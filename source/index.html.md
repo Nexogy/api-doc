@@ -108,7 +108,7 @@ Additionally use the <code>Accept:application/json</code> Headers for every API 
 
 ```shell
 curl "https://staging.api.nexogy.com/api/residential/client?email=<value>&
-first_name=<value>&last_name=<value>&zipcode=<value>&address=<value>&sameBillingAddress=<values>&billing_zipcode=<value>&billing_address=<value>&has_subreseller_id=<value>&subreseller_id=<value>&start_billing_date=<value>&did_porting=<value>&did_number=<value>"
+first_name=<value>&last_name=<value>&zipcode=<value>&address=<value>&address2=<value>&sameBillingAddress=<values>&billing_zipcode=<value>&billing_address=<value>&billing_address2=<value>&has_subreseller_id=<value>&subreseller_id=<value>&start_billing_date=<value>&did_porting=<value>&did_number=<value>"
   -H "Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2"
   -H "Accept:application/json"
 ```
@@ -128,6 +128,7 @@ $data['first_name'] = 'John';
 $data['last_name'] = 'Doe';
 $data['zipcode'] = '12345';
 $data['address'] = 'Client address';
+$data['address2'] = 'Client address 2';
 $data['sameBillingAddress'] = 1;
 $data['has_subreseller_id'] = 1;
 $data['subreseller_id'] = '123';
@@ -163,16 +164,26 @@ curl_close($c);
       "id": 92769,
       "ns_domain": "kerryking2.com"
     }
+    "taxes" = {
+      "usage" => {
+          "local"         => {"income" => "5%", "sales" => "5%"},
+          "national"      => ["income" => "5%", "sales" => "5%"},
+          "international" => ["income" => "5%", "sales" => "5%"}
+      },
+      "breakdown" => {
+          "sales"         => "5%",
+          "income"        => "5%"    }
+    }
   }
 }
 ```
 
-This endpoint creates a Client on DNA. You will get back a <code>id</code> and a <code>ns_domain</code> these will be required for other operations. 
+This endpoint creates a Client on DNA. You will get back a <code>id</code> and a <code>ns_domain</code> these will be required for other operations. Besides that, you will also get a tax breakdown and usage in percent.
 
 ### HTTP Request
 
 `POST https://staging.api.nexogy.com/api/residential/client?email=<value>&
-first_name=<value>&last_name=<value>&zipcode=<value>&address=<value>&sameBillingAddress=<values>&billing_zipcode=<value>&billing_address=<value>&has_subreseller_id=<value>&subreseller_id=<value>&start_billing_date=<value>&did_porting=<value>&did_number=<value>`
+first_name=<value>&last_name=<value>&zipcode=<value>&address=<value>&address2=<value>&sameBillingAddress=<values>&billing_zipcode=<value>&billing_address=<value>&billing_address2=<value>&has_subreseller_id=<value>&subreseller_id=<value>&start_billing_date=<value>&did_porting=<value>&did_number=<value>`
 
 ### Query Parameters
 
@@ -188,9 +199,11 @@ email | email@email.com | Email used for any information required for the client
 first_name | Steve | First name for the client.
 last_name | Harris | Last name for the client.
 zipcode | 33134 | The client's zipcode.
-address | 126 Mendoza avenue aparment 7A | The client's address.
+address | 126 Mendoza avenue | The client's address.
+address2 | apartment 7A | The client's second line address.
 sameBillingAddress | 1 | Accepts 1 or 0 and determines if the address parameter will be used for billing, when 0 <code>billing_address</code> and <code>billing_zipcode</code> are required.
 billing_address | 2121 ponce de leon | The billing address.
+billing_address2 | 2121 ponce de leon | The billing second line address.
 billing_zipcode | 33308 | The billing zipcode.
 did_porting | 0 | Acepts 1 or 0 depending on if the did_number you are providing is ported or no.
 did_number | 3052304999 | Main phone number for the client.
