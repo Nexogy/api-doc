@@ -395,17 +395,57 @@ first_name=&lt;value&gt;&amp;last_name=&lt;value&gt;&amp;zipcode=&lt;value&gt;&a
     </span><span class="s2">"client"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">92769</span><span class="p">,</span><span class="w">
       </span><span class="s2">"ns_domain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kerryking2.com"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-    </span><span class="s2">"taxes"</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"usage"</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"local"</span><span class="w">         </span><span class="err">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="s2">"income"</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="s2">"5%"</span><span class="p">,</span><span class="w"> </span><span class="s2">"sales"</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="s2">"5%"</span><span class="p">},</span><span class="w">
-          </span><span class="s2">"national"</span><span class="w">      </span><span class="err">=&gt;</span><span class="w"> </span><span class="p">[</span><span class="s2">"income"</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="s2">"5%"</span><span class="p">,</span><span class="w"> </span><span class="s2">"sales"</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="s2">"5%"</span><span class="p">},</span><span class="w">
-          </span><span class="s2">"international"</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="p">[</span><span class="s2">"income"</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="s2">"5%"</span><span class="p">,</span><span class="w"> </span><span class="s2">"sales"</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="s2">"5%"</span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"breakdown"</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"sales"</span><span class="w">         </span><span class="err">=&gt;</span><span class="w"> </span><span class="s2">"5%"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"income"</span><span class="w">        </span><span class="err">=&gt;</span><span class="w"> </span><span class="s2">"5%"</span><span class="w">    </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"taxes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"breakdown"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"tax_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FL COMMUNICATIONS SERVICES TAX"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"percent_taxable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0000"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"tax_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FL 911 SURCHARGE"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"percent_taxable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0000"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="s2">"usage"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"Long Distance Calls"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"tax_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FEDERAL UNIVERSAL SERVICE FUND"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"percent_taxable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0000"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"tax_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LOCAL COMMUNICATIONS SVC. TAX"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"percent_taxable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0000"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"tax_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FL COMMUNICATIONS SERVICES TAX"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"percent_taxable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0000"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"tax_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FEDERAL TRS FUND"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"percent_taxable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0000"</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"International Calls"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"tax_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FEDERAL UNIVERSAL SERVICE FUND"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"percent_taxable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0000"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"tax_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FL COMMUNICATIONS SERVICES TAX"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"percent_taxable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0000"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"tax_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FEDERAL TRS FUND"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"percent_taxable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0000"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"tax_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LOCAL COMMUNICATIONS SVC. TAX"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"percent_taxable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0000"</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
