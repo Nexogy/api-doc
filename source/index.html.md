@@ -163,17 +163,57 @@ curl_close($c);
     "client": {
       "id": 92769,
       "ns_domain": "kerryking2.com"
-    }
-    "taxes" = {
-      "usage" => {
-          "local"         => {"income" => "5%", "sales" => "5%"},
-          "national"      => ["income" => "5%", "sales" => "5%"},
-          "international" => ["income" => "5%", "sales" => "5%"}
-      },
-      "breakdown" => {
-          "sales"         => "5%",
-          "income"        => "5%"    }
-    }
+    },
+    "taxes": {
+            "breakdown": [
+                {
+                    "tax_name": "FL COMMUNICATIONS SERVICES TAX",
+                    "percent_taxable": "1.0000"
+                },
+                {
+                    "tax_name": "FL 911 SURCHARGE",
+                    "percent_taxable": "1.0000"
+                }
+            ],
+            "usage": {
+                "Long Distance Calls": [
+                    {
+                        "tax_name": "FEDERAL UNIVERSAL SERVICE FUND",
+                        "percent_taxable": "1.0000"
+                    },
+                    {
+                        "tax_name": "LOCAL COMMUNICATIONS SVC. TAX",
+                        "percent_taxable": "1.0000"
+                    },
+                    {
+                        "tax_name": "FL COMMUNICATIONS SERVICES TAX",
+                        "percent_taxable": "1.0000"
+                    },
+                    {
+                        "tax_name": "FEDERAL TRS FUND",
+                        "percent_taxable": "1.0000"
+                    }
+                ],
+                "International Calls": [
+                    {
+                        "tax_name": "FEDERAL UNIVERSAL SERVICE FUND",
+                        "percent_taxable": "1.0000"
+                    },
+                    {
+                        "tax_name": "FL COMMUNICATIONS SERVICES TAX",
+                        "percent_taxable": "1.0000"
+                    },
+                    {
+                        "tax_name": "FEDERAL TRS FUND",
+                        "percent_taxable": "1.0000"
+                    },
+                    {
+                        "tax_name": "LOCAL COMMUNICATIONS SVC. TAX",
+                        "percent_taxable": "1.0000"
+                    }
+                ]
+            }
+        }
   }
 }
 ```
