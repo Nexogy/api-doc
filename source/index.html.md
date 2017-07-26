@@ -486,6 +486,112 @@ Parameter | Description
 --------- | -----------
 domain | The domain name of the client.
 
+## Get Taxes
+
+```shell
+curl "https://staging.api.nexogy.com/api/residential/taxes/<client_id>"
+  -H "Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2"
+  -H "Accept:application/json"
+```
+
+```php
+<?
+// Set api url
+$apiUrl = 'https://staging.api.nexogy.com/api/residential/taxes/<client_id>';
+// Start cURL
+$c = curl_init();
+curl_setopt($c, CURLOPT_CONNECTTIMEOUT, 5);
+curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+
+// Set up headers
+$request_headers = array();
+$request_headers[] = 'Authorization: Bearer '. $access_token;
+$request_headers[] = 'Accept: application/json';
+curl_setopt($c, CURLOPT_HTTPHEADER, $request_headers);
+
+// Setup the remainder of the cURL request
+curl_setopt($c, CURLOPT_URL, $apiUrl);
+
+// Execute the API call and return the response
+$result = curl_exec($c);
+curl_close($c);
+?>
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "result": "OK",
+    "data": {
+        "taxes": {
+            "breakdown": [
+                {
+                    "tax_name": "FEDERAL TRS FUND",
+                    "percent_taxable": "0.6490"
+                },
+                {
+                    "tax_name": "LOCAL COMMUNICATIONS SVC. TAX",
+                    "percent_taxable": "1.0000"
+                }
+            ],
+            "usage": {
+                "Long Distance Calls": [
+                    {
+                        "tax_name": "FEDERAL TRS FUND",
+                        "percent_taxable": "1.0000"
+                    },
+                    {
+                        "tax_name": "FL COMMUNICATIONS SERVICES TAX",
+                        "percent_taxable": "1.0000"
+                    },
+                    {
+                        "tax_name": "FEDERAL UNIVERSAL SERVICE FUND",
+                        "percent_taxable": "1.0000"
+                    },
+                    {
+                        "tax_name": "LOCAL COMMUNICATIONS SVC. TAX",
+                        "percent_taxable": "1.0000"
+                    }
+                ],
+                "International Calls": [
+                    {
+                        "tax_name": "FL COMMUNICATIONS SERVICES TAX",
+                        "percent_taxable": "1.0000"
+                    },
+                    {
+                        "tax_name": "FEDERAL UNIVERSAL SERVICE FUND",
+                        "percent_taxable": "1.0000"
+                    },
+                    {
+                        "tax_name": "LOCAL COMMUNICATIONS SVC. TAX",
+                        "percent_taxable": "1.0000"
+                    },
+                    {
+                        "tax_name": "FEDERAL TRS FUND",
+                        "percent_taxable": "1.0000"
+                    }
+                ]
+            }
+        }
+    }
+}
+```
+
+This endpoint gets the tax information for a certain client.
+
+<aside class="warning">You will need the <code>&lt;client_id&gt;</code> for this operation</aside>
+
+### HTTP Request
+
+`GET https://staging.api.nexogy.com/api/residential/taxes/<client_id>`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+client_id | The ID of the client.
+
 ## Update
 
 ```shell
