@@ -791,6 +791,113 @@ Remember — store your <code>&lt;id&gt;</code> and <code>&lt;ns_domain&gt;</cod
 </tr>
 </tbody></table>
 
+<h2 id="get-taxes">Get Taxes</h2>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://staging.api.nexogy.com/api/residential/taxes/&lt;client_id&gt;"</span>
+  -H <span class="s2">"Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2"</span>
+  -H <span class="s2">"Accept:application/json"</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?</span>
+<span class="c1">// Set api url
+</span><span class="nv">$apiUrl</span> <span class="o">=</span> <span class="s1">'https://staging.api.nexogy.com/api/residential/taxes/&lt;client_id&gt;'</span><span class="p">;</span>
+<span class="c1">// Start cURL
+</span><span class="nv">$c</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_CONNECTTIMEOUT</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+<span class="c1">// Set up headers
+</span><span class="nv">$request_headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+<span class="nv">$request_headers</span><span class="p">[]</span> <span class="o">=</span> <span class="s1">'Authorization: Bearer '</span><span class="o">.</span> <span class="nv">$access_token</span><span class="p">;</span>
+<span class="nv">$request_headers</span><span class="p">[]</span> <span class="o">=</span> <span class="s1">'Accept: application/json'</span><span class="p">;</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_HTTPHEADER</span><span class="p">,</span> <span class="nv">$request_headers</span><span class="p">);</span>
+
+<span class="c1">// Setup the remainder of the cURL request
+</span><span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_URL</span><span class="p">,</span> <span class="nv">$apiUrl</span><span class="p">);</span>
+
+<span class="c1">// Execute the API call and return the response
+</span><span class="nv">$result</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$c</span><span class="p">);</span>
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$c</span><span class="p">);</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"taxes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"breakdown"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"tax_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FEDERAL TRS FUND"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"percent_taxable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.6490"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"tax_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LOCAL COMMUNICATIONS SVC. TAX"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"percent_taxable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0000"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="s2">"usage"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"Long Distance Calls"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"tax_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FEDERAL TRS FUND"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"percent_taxable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0000"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"tax_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FL COMMUNICATIONS SERVICES TAX"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"percent_taxable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0000"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"tax_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FEDERAL UNIVERSAL SERVICE FUND"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"percent_taxable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0000"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"tax_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LOCAL COMMUNICATIONS SVC. TAX"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"percent_taxable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0000"</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="s2">"International Calls"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"tax_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FL COMMUNICATIONS SERVICES TAX"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"percent_taxable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0000"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"tax_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FEDERAL UNIVERSAL SERVICE FUND"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"percent_taxable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0000"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"tax_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LOCAL COMMUNICATIONS SVC. TAX"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"percent_taxable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0000"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"tax_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FEDERAL TRS FUND"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"percent_taxable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0000"</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint gets the tax information for a certain client.</p>
+
+<aside class="warning">You will need the <code>&lt;client_id&gt;</code> for this operation</aside>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://staging.api.nexogy.com/api/residential/taxes/&lt;client_id&gt;</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>client_id</td>
+<td>The ID of the client.</td>
+</tr>
+</tbody></table>
+
 <h2 id="update">Update</h2>
 <pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://staging.api.nexogy.com/api/residential/client/&lt;id&gt;"</span>
   -H <span class="s2">"Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2"</span>
