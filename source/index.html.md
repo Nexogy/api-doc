@@ -654,6 +654,72 @@ Parameter | Example | Description
 --------- | ------- | -----------
 start_billing_date | 06/08/2017 | Date in  MM/DD/YYYY Format for Billing purposes.
 
+## Send LOA
+
+```shell
+curl "https://staging.api.nexogy.com/api/residential/loa"
+  -H "Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2"
+  -H "Accept:application/json"
+```
+
+```php
+<?
+// Set api url
+$apiUrl = 'https://staging.api.nexogy.com/api/residential/loa';
+// Start cURL
+$c = curl_init();
+curl_setopt($c, CURLOPT_CONNECTTIMEOUT, 5);
+curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+
+// Populate array with parameters
+$data['client_id'] = 1111;
+$data['loa'] = '@' . realpath('loa.pdf');
+$data['bill'] = '@' . realpath('bill.pdf');
+
+// Set up headers
+$request_headers = array();
+$request_headers[] = 'Authorization: Bearer '. $access_token;
+$request_headers[] = 'Accept: application/json';
+curl_setopt($c, CURLOPT_HTTPHEADER, $request_headers);
+
+// Setup the remainder of the cURL request
+curl_setopt($c, CURLOPT_URL, $apiUrl);
+curl_setopt($c, CURLOPT_POST, true);
+curl_setopt($c, CURLOPT_POSTFIELDS, http_build_query($data));
+
+// Execute the API call and return the response
+$result = curl_exec($c);
+curl_close($c);
+?>
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "result": "OK",
+  "data": {
+    "timestamp": 1496941963
+  }
+}
+```
+
+When porting a number, usually providers request a signed LOA and a utility bill to confirm ownership, identity and authorization from the end customer to execute the porting. This endpoint takes these two documents in pdf format, already signed and links them to the client.
+
+<aside class="warning">You will need the <code>&lt;id&gt;</code> for this operation</aside>
+
+### HTTP Request
+
+`POST https://staging.api.nexogy.com/api/residential/loa`
+
+### URL Parameters
+
+Parameter | Example | Description
+--------- | ------- | -----------
+client_id | 1111    | The ID of the client,the one we sent you when the client was created.
+loa       |         | The pdf file containing a signed LOA.
+bill      |         | The pdf file containing a utility bill.
+
 # Device
 
 Once a Client is Created a default device is created, additional devices may be created later, with the device method.
