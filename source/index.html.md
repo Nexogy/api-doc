@@ -717,8 +717,8 @@ When porting a number, usually providers request a signed LOA and a utility bill
 Parameter | Example | Description
 --------- | ------- | -----------
 client_id | 1111    | The ID of the client,the one we sent you when the client was created.
-loa       |         | The pdf file containing a signed LOA.
-bill      |         | The pdf file containing a utility bill.
+loa       |         | The pdf file containing a signed LOA. The file size must be smaller than 1.5 MB
+bill      |         | The pdf file containing a utility bill. The file size must be smaller than 1.5 MB
 
 # Device
 
