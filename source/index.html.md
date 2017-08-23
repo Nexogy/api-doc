@@ -720,6 +720,68 @@ client_id | 1111    | The ID of the client,the one we sent you when the client w
 loa       |         | The pdf file containing a signed LOA. The file size must be smaller than 1.5 MB
 bill      |         | The pdf file containing a utility bill. The file size must be smaller than 1.5 MB
 
+## Get Porting Updates
+
+```shell
+curl "https://staging.api.nexogy.com/api/residential/task/porting/<client_id>/updates"
+  -H "Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2"
+  -H "Accept:application/json"
+```
+
+```php
+<?
+// Set api url
+$apiUrl = 'https://staging.api.nexogy.com/api/residential/task/porting/<client_id>/updates';
+// Start cURL
+$c = curl_init();
+curl_setopt($c, CURLOPT_CONNECTTIMEOUT, 5);
+curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+
+// Set up headers
+$request_headers = array();
+$request_headers[] = 'Authorization: Bearer '. $access_token;
+$request_headers[] = 'Accept: application/json';
+curl_setopt($c, CURLOPT_HTTPHEADER, $request_headers);
+
+// Setup the remainder of the cURL request
+curl_setopt($c, CURLOPT_URL, $apiUrl);
+
+// Execute the API call and return the response
+$result = curl_exec($c);
+curl_close($c);
+?>
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "result": "OK",
+    "data": {
+        "number": "3056028300",
+        "status": "Pending",
+        "provider": "Peerless",
+        "trunk_group": "Default",
+        "destination": "NETSAPIENS",
+        "timestamp": 1503514889
+    }
+}
+```
+
+This endpoint allows to get the status of the porting task.
+
+<aside class="warning">You will need the <code>&lt;client_id&gt;</code> for this operation</aside>
+
+### HTTP Request
+
+`POST https://staging.api.nexogy.com/api/residential/task/porting/<client_id>/updates`
+
+### URL Parameters
+
+Parameter | Example | Description
+--------- | ------- | -----------
+client_id | 1111    | The ID of the client,the one we sent you when the client was created.
+
 # Device
 
 Once a Client is Created a default device is created, additional devices may be created later, with the device method.
