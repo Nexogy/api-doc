@@ -774,7 +774,7 @@ This endpoint allows to get the status of the porting task.
 
 ### HTTP Request
 
-`POST https://staging.api.nexogy.com/api/residential/task/porting/<client_id>/updates`
+`GET https://staging.api.nexogy.com/api/residential/task/porting/<client_id>/updates`
 
 ### URL Parameters
 
