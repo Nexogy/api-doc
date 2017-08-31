@@ -825,9 +825,6 @@ curl_close($c);
         "serial": "FOC1106X1A0",
         "shippings": [
           "0": [
-            "provider": "TRITON DATACOM, INC",
-            "po_number": "PO1708041",
-            "order_number": "PO1708041",
             "method": "FedEx",
             "address": "666 Valhalla st.",
             "status": "Shipped",
