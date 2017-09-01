@@ -853,6 +853,45 @@ Parameter | Example | Description
 --------- | ------- | -----------
 client_id | 1111    | The ID of the client,the one we sent you when the client was created.
 
+## Projects Interface
+
+```shell
+curl "https://staging.api.nexogy.com/api/residential/projects"
+  -H "Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2"
+```
+
+```php
+<?
+// Set api url
+$apiUrl = 'https://staging.api.nexogy.com/api/residential/projects';
+// Start cURL
+$c = curl_init();
+curl_setopt($c, CURLOPT_CONNECTTIMEOUT, 5);
+curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+
+// Set up headers
+$request_headers = array();
+$request_headers[] = 'Authorization: Bearer '. $access_token;
+$request_headers[] = 'Accept: application/json';
+curl_setopt($c, CURLOPT_HTTPHEADER, $request_headers);
+
+// Setup the remainder of the cURL request
+curl_setopt($c, CURLOPT_URL, $apiUrl);
+
+// Execute the API call and return the response
+$result = curl_exec($c);
+curl_close($c);
+?>
+```
+
+> You just have to access the url through a web browser to see the list of projects
+
+This endpoint shows a web page with a list of all provisioning projects. The list includes the name of the company, the agent of the project, the user who quoted the project, the date the project was signed and started, and a list of tasks with their corresponding status. You can search by company name or filter by agent. Clicking on the "Phones PO & Shipping" will show the details of the shipping task. The most important requirement is that the token has to be passed as a header (Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2 ) in the web browser.
+
+### HTTP Request
+
+`GET https://staging.api.nexogy.com/api/residential/projects`
+
 # Device
 
 Once a Client is Created a default device is created, additional devices may be created later, with the device method.
