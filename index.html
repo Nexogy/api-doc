@@ -1179,6 +1179,41 @@ Remember — store your <code>&lt;id&gt;</code> and <code>&lt;ns_domain&gt;</cod
 </tr>
 </tbody></table>
 
+<h2 id="projects-interface">Projects Interface</h2>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://staging.api.nexogy.com/api/residential/projects"</span>
+  -H <span class="s2">"Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2"</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?</span>
+<span class="c1">// Set api url
+</span><span class="nv">$apiUrl</span> <span class="o">=</span> <span class="s1">'https://staging.api.nexogy.com/api/residential/projects'</span><span class="p">;</span>
+<span class="c1">// Start cURL
+</span><span class="nv">$c</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_CONNECTTIMEOUT</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_RETURNTRANSFER</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+<span class="c1">// Set up headers
+</span><span class="nv">$request_headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+<span class="nv">$request_headers</span><span class="p">[]</span> <span class="o">=</span> <span class="s1">'Authorization: Bearer '</span><span class="o">.</span> <span class="nv">$access_token</span><span class="p">;</span>
+<span class="nv">$request_headers</span><span class="p">[]</span> <span class="o">=</span> <span class="s1">'Accept: application/json'</span><span class="p">;</span>
+<span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_HTTPHEADER</span><span class="p">,</span> <span class="nv">$request_headers</span><span class="p">);</span>
+
+<span class="c1">// Setup the remainder of the cURL request
+</span><span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_URL</span><span class="p">,</span> <span class="nv">$apiUrl</span><span class="p">);</span>
+
+<span class="c1">// Execute the API call and return the response
+</span><span class="nv">$result</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$c</span><span class="p">);</span>
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$c</span><span class="p">);</span>
+<span class="cp">?&gt;</span>
+</code></pre>
+<blockquote>
+<p>You just have to access the url through a web browser to see the list of projects</p>
+</blockquote>
+
+<p>This endpoint shows a web page with a list of all provisioning projects. The list includes the name of the company, the agent of the project, the user who quoted the project, the date the project was signed and started, and a list of tasks with their corresponding status. You can search by company name or filter by agent. Clicking on the &ldquo;Phones PO &amp; Shipping&rdquo; will show the details of the shipping task. The most important requirement is that the token has to be passed as a header (Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2 ) in the web browser.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://staging.api.nexogy.com/api/residential/projects</code></p>
+
 <h1 id="device">Device</h1>
 
 <p>Once a Client is Created a default device is created, additional devices may be created later, with the device method.</p>
