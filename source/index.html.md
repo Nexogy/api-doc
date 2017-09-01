@@ -895,6 +895,12 @@ This endpoint shows a web page with a list of all provisioning projects. The lis
 
 `GET https://staging.api.nexogy.com/api/residential/projects`
 
+### URL Parameters
+
+Parameter | Example | Description
+--------- | ------- | -----------
+client_id | 1111    | The ID of the client,the one we sent you when the client was created.
+
 # Device
 
 Once a Client is Created a default device is created, additional devices may be created later, with the device method.
