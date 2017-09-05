@@ -853,17 +853,17 @@ Parameter | Example | Description
 --------- | ------- | -----------
 client_id | 1111    | The ID of the client,the one we sent you when the client was created.
 
-## Projects Interface
+## Projects
 
 ```shell
-curl "https://staging.api.nexogy.com/api/residential/projects"
+curl "https://staging.api.nexogy.com/api/residential/projects/<format>"
   -H "Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2"
 ```
 
 ```php
 <?
 // Set api url
-$apiUrl = 'https://staging.api.nexogy.com/api/residential/projects';
+$apiUrl = 'https://staging.api.nexogy.com/api/residential/projects/web';
 // Start cURL
 $c = curl_init();
 curl_setopt($c, CURLOPT_CONNECTTIMEOUT, 5);
@@ -884,13 +884,49 @@ curl_close($c);
 ?>
 ```
 
-> You just have to access the url through a web browser to see the list of projects
+> If you use the value 'web' with parameter format, you just have to access the url through a web browser to see the list of projects. If you use the value 'json', the endpoint will return the list of projects in json format.
 
-This endpoint shows a web page with a list of all provisioning projects. The list includes the name of the company, the agent of the project, the user who quoted the project, the date the project was signed and started, and a list of tasks with their corresponding status. You can search by company name or filter by agent. Clicking on the "Phones PO & Shipping" will show the details of the shipping task. The most important requirement is that the token has to be passed as a header (Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2 ) in the web browser.
+```json
+{
+    "result": "OK",
+    "data": [
+        {
+            "company": "Company 1",
+            "agent": "Agent",
+            "quoted_by": "Carlos Mathison",
+            "signed": "Fri, Aug 25, 2017 12:00 AM",
+            "started": "Fri, Aug 25, 2017 3:35 PM",
+            "pending_tasks": [
+                "Phones PO & Shipping",
+                "Forward when Offline",
+                "Porting",
+                "Project Completed"
+            ]
+        },
+        {
+            "company": "Company 2",
+            "agent": "Agent",
+            "quoted_by": "Carlos Mathison",
+            "signed": "Tue, Aug 29, 2017 12:00 AM",
+            "started": "Tue, Aug 29, 2017 3:10 PM",
+            "pending_tasks": [
+                "Phones PO & Shipping",
+                "Project Completed"
+            ]
+        },
+    ]
+}
+```
+
+This endpoint either shows a web page with a list of all provisioning projects or returns the same list in json format. The list includes the name of the company, the agent of the project, the user who quoted the project, the date the project was signed and started, and a list of tasks with their corresponding status. You can search by company name or filter by agent in the web version. Clicking on the "Phones PO & Shipping" will show the details of the shipping task. The most important requirement is that the token has to be passed as a header (Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2 ) in the web browser.
 
 ### HTTP Request
 
-`GET https://staging.api.nexogy.com/api/residential/projects`
+`GET https://staging.api.nexogy.com/api/residential/projects/<format>`
+
+Parameter | Example | Description
+--------- | ------- | -----------
+format    | web     | This value is 'web' or 'json'. If you use 'web' the endpoint will show a list of projects in HTML format. If you use 'json', you will get the same list but in json format.
 
 # Device
 
