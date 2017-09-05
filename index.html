@@ -1179,12 +1179,12 @@ Remember — store your <code>&lt;id&gt;</code> and <code>&lt;ns_domain&gt;</cod
 </tr>
 </tbody></table>
 
-<h2 id="projects-interface">Projects Interface</h2>
-<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://staging.api.nexogy.com/api/residential/projects"</span>
+<h2 id="projects">Projects</h2>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://staging.api.nexogy.com/api/residential/projects/&lt;format&gt;"</span>
   -H <span class="s2">"Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2"</span>
 </code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?</span>
 <span class="c1">// Set api url
-</span><span class="nv">$apiUrl</span> <span class="o">=</span> <span class="s1">'https://staging.api.nexogy.com/api/residential/projects'</span><span class="p">;</span>
+</span><span class="nv">$apiUrl</span> <span class="o">=</span> <span class="s1">'https://staging.api.nexogy.com/api/residential/projects/web'</span><span class="p">;</span>
 <span class="c1">// Start cURL
 </span><span class="nv">$c</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
 <span class="nb">curl_setopt</span><span class="p">(</span><span class="nv">$c</span><span class="p">,</span> <span class="nx">CURLOPT_CONNECTTIMEOUT</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
@@ -1205,14 +1205,57 @@ Remember — store your <code>&lt;id&gt;</code> and <code>&lt;ns_domain&gt;</cod
 <span class="cp">?&gt;</span>
 </code></pre>
 <blockquote>
-<p>You just have to access the url through a web browser to see the list of projects</p>
+<p>If you use the value &lsquo;web&rsquo; with parameter format, you just have to access the url through a web browser to see the list of projects. If you use the value &lsquo;json&rsquo;, the endpoint will return the list of projects in json format.</p>
 </blockquote>
-
-<p>This endpoint shows a web page with a list of all provisioning projects. The list includes the name of the company, the agent of the project, the user who quoted the project, the date the project was signed and started, and a list of tasks with their corresponding status. You can search by company name or filter by agent. Clicking on the &ldquo;Phones PO &amp; Shipping&rdquo; will show the details of the shipping task. The most important requirement is that the token has to be passed as a header (Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2 ) in the web browser.</p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Company 1"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"agent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Agent"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"quoted_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Carlos Mathison"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"signed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fri, Aug 25, 2017 12:00 AM"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"started"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fri, Aug 25, 2017 3:35 PM"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"pending_tasks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"Phones PO &amp; Shipping"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Forward when Offline"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Porting"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Project Completed"</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Company 2"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"agent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Agent"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"quoted_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Carlos Mathison"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"signed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tue, Aug 29, 2017 12:00 AM"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"started"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tue, Aug 29, 2017 3:10 PM"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"pending_tasks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"Phones PO &amp; Shipping"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"Project Completed"</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint either shows a web page with a list of all provisioning projects or returns the same list in json format. The list includes the name of the company, the agent of the project, the user who quoted the project, the date the project was signed and started, and a list of tasks with their corresponding status. You can search by company name or filter by agent in the web version. Clicking on the &ldquo;Phones PO &amp; Shipping&rdquo; will show the details of the shipping task. The most important requirement is that the token has to be passed as a header (Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2 ) in the web browser.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://staging.api.nexogy.com/api/residential/projects</code></p>
+<p><code class="prettyprint">GET https://staging.api.nexogy.com/api/residential/projects/&lt;format&gt;</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>format</td>
+<td>web</td>
+<td>This value is &lsquo;web&rsquo; or &lsquo;json&rsquo;. If you use &lsquo;web&rsquo; the endpoint will show a list of projects in HTML format. If you use &lsquo;json&rsquo;, you will get the same list but in json format.</td>
+</tr>
+</tbody></table>
 
 <h1 id="device">Device</h1>
 
