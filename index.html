@@ -1239,6 +1239,14 @@ Remember — store your <code>&lt;id&gt;</code> and <code>&lt;ns_domain&gt;</cod
 </span></code></pre>
 <p>This endpoint either shows a web page with a list of all provisioning projects or returns the same list in json format. The list includes the name of the company, the agent of the project, the user who quoted the project, the date the project was signed and started, and a list of tasks with their corresponding status. You can search by company name or filter by agent in the web version. Clicking on the &ldquo;Phones PO &amp; Shipping&rdquo; will show the details of the shipping task. The most important requirement is that the token has to be passed as a header (Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2 ) in the web browser.</p>
 
+<p>Examples:</p>
+
+<p>Web interface
+<code class="prettyprint">https://staging.api.nexogy.com/api/residential/projects/web</code> </p>
+
+<p>List in json format
+<code class="prettyprint">GET https://staging.api.nexogy.com/api/residential/projects/json</code></p>
+
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">GET https://staging.api.nexogy.com/api/residential/projects/&lt;format&gt;</code></p>
