@@ -232,7 +232,6 @@ first_name=<value>&last_name=<value>&zipcode=<value>&address=<value>&address2=<v
 Parameter | Example | Description
 --------- | ------- | -----------
 start_billing_date | 05/29/2017 | Date in  MM/DD/YYYY Format for Billing purposes
-customer_id | 1234 | Customer id you use on your side.
 has_subreseller_id | 1 | This is an id used to group your client's IDs under a subreseller account if you have resellers that handle your clients this is how we would identify them for consolidation purposes. Accepts 1 or 0.
 subreseller_id | 1234 | Send this parameter only if you use a subreseller structure.
 email | email@email.com | Email used for any information required for the client, for example to send received V-mail.
@@ -674,7 +673,6 @@ curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
 // Populate array with parameters
 $data['client_id'] = 1111;
 $data['loa'] = '@' . realpath('loa.pdf');
-$data['bill'] = '@' . realpath('bill.pdf');
 
 // Set up headers
 $request_headers = array();
@@ -704,7 +702,7 @@ curl_close($c);
 }
 ```
 
-When porting a number, usually providers request a signed LOA and a utility bill to confirm ownership, identity and authorization from the end customer to execute the porting. This endpoint takes these two documents in pdf format, already signed and links them to the client.
+When porting a number, usually providers request a signed LOA to confirm ownership, identity and authorization from the end customer to execute the porting. This endpoint takes this document in pdf format, already signed and links it to the client.
 
 <aside class="warning">You will need the <code>&lt;id&gt;</code> for this operation</aside>
 
@@ -718,7 +716,6 @@ Parameter | Example | Description
 --------- | ------- | -----------
 client_id | 1111    | The ID of the client,the one we sent you when the client was created.
 loa       |         | The pdf file containing a signed LOA. The file size must be smaller than 1.5 MB
-bill      |         | The pdf file containing a utility bill. The file size must be smaller than 1.5 MB
 
 ## Get Porting Updates
 
@@ -768,7 +765,7 @@ curl_close($c);
 }
 ```
 
-This endpoint allows to get the status of the porting task.
+This endpoint allows to get the status of the porting task. Possible status returned are "Pending", "Completed", or "Unable to Port".
 
 <aside class="warning">You will need the <code>&lt;client_id&gt;</code> for this operation</aside>
 
