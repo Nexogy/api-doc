@@ -973,7 +973,6 @@ Remember — store your <code>&lt;id&gt;</code> and <code>&lt;ns_domain&gt;</cod
 <span class="c1">// Populate array with parameters
 </span><span class="nv">$data</span><span class="p">[</span><span class="s1">'client_id'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1111</span><span class="p">;</span>
 <span class="nv">$data</span><span class="p">[</span><span class="s1">'loa'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'@'</span> <span class="o">.</span> <span class="nb">realpath</span><span class="p">(</span><span class="s1">'loa.pdf'</span><span class="p">);</span>
-<span class="nv">$data</span><span class="p">[</span><span class="s1">'bill'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'@'</span> <span class="o">.</span> <span class="nb">realpath</span><span class="p">(</span><span class="s1">'bill.pdf'</span><span class="p">);</span>
 
 <span class="c1">// Set up headers
 </span><span class="nv">$request_headers</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
@@ -1001,7 +1000,7 @@ Remember — store your <code>&lt;id&gt;</code> and <code>&lt;ns_domain&gt;</cod
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>When porting a number, usually providers request a signed LOA and a utility bill to confirm ownership, identity and authorization from the end customer to execute the porting. This endpoint takes these two documents in pdf format, already signed and links them to the client.</p>
+<p>When porting a number, usually providers request a signed LOA to confirm ownership, identity and authorization from the end customer to execute the porting. This endpoint takes this document in pdf format, already signed and links it to the client.</p>
 
 <aside class="warning">You will need the <code>&lt;id&gt;</code> for this operation</aside>
 
@@ -1027,11 +1026,6 @@ Remember — store your <code>&lt;id&gt;</code> and <code>&lt;ns_domain&gt;</cod
 <td>loa</td>
 <td></td>
 <td>The pdf file containing a signed LOA. The file size must be smaller than 1.5 MB</td>
-</tr>
-<tr>
-<td>bill</td>
-<td></td>
-<td>The pdf file containing a utility bill. The file size must be smaller than 1.5 MB</td>
 </tr>
 </tbody></table>
 
@@ -1076,7 +1070,7 @@ Remember — store your <code>&lt;id&gt;</code> and <code>&lt;ns_domain&gt;</cod
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint allows to get the status of the porting task.</p>
+<p>This endpoint allows to get the status of the porting task. Possible status returned are &ldquo;Pending&rdquo;, &ldquo;Completed&rdquo;, or &ldquo;Unable to Port&rdquo;.</p>
 
 <aside class="warning">You will need the <code>&lt;client_id&gt;</code> for this operation</aside>
 
