@@ -1039,15 +1039,11 @@ curl "https://staging.api.nexogy.com/api/dids/search?npa=<value>&state=<value>"
 ```php
 <?
 // Set api url
-$apiUrl = 'https://staging.api.nexogy.com/api/dids/search';
+$apiUrl = 'https://staging.api.nexogy.com/api/dids/search?npa=305&state=FL';
 // Start cURL
 $c = curl_init();
 curl_setopt($c, CURLOPT_CONNECTTIMEOUT, 5);
 curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
-
-// Populate array with parameters
-$data['npa'] = '305';
-$data['state'] = 'FL';
 
 // Set up headers
 $request_headers = array();
@@ -1058,7 +1054,6 @@ curl_setopt($c, CURLOPT_HTTPHEADER, $request_headers);
 // Setup the remainder of the cURL request
 curl_setopt($c, CURLOPT_URL, $apiUrl);
 curl_setopt($c, CURLOPT_POST, true);
-curl_setopt($c, CURLOPT_POSTFIELDS, http_build_query($data));
 
 // Execute the API call and return the response
 $result = curl_exec($c);
