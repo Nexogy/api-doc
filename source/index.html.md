@@ -1039,7 +1039,7 @@ curl "https://staging.api.nexogy.com/api/dids/search?npa=<value>&state=<value>"
 ```php
 <?
 // Set api url
-$apiUrl = 'https://staging.api.nexogy.com/api/dids/search?npa=305&state=FL';
+$apiUrl = 'https://staging.api.nexogy.com/api/dids/search?npa=305&state=F';
 // Start cURL
 $c = curl_init();
 curl_setopt($c, CURLOPT_CONNECTTIMEOUT, 5);
