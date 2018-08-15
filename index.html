@@ -1563,6 +1563,21 @@ $request_headers[] = '</span><span class="nx">Accept</span><span class="o">:</sp
 </tr>
 </tbody></table>
 
+<h1 id="requests-dashboard">Requests Dashboard</h1>
+
+<h2 id="requests-list">Requests List</h2>
+
+<p>This endpoint shows a web page with the list of all requests made. To use it, you just have to send a get from any browser. The list includes the Ip, url requested, date of the request, request headers, parameters, the response sent by the api and the response code. You can search by token or filter by start and end date. Information can also be ordered by clicking the table headers. The most important requirement is that the token has to be passed as a header (Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2 ) in the web browser.</p>
+
+<p>Examples:</p>
+
+<p>Web interface
+<code class="prettyprint">https://staging.api.nexogy.com/api/residential/dev-dashboard</code> </p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://staging.api.nexogy.com/api/residential/dev-dashboard</code></p>
+
           <h1 id="errors">Errors</h1>
 
 <aside class="notice">These errors have evolved with the API&rsquo;s and business&rsquo; requirements. Verify these errors frequently</aside>
