@@ -1195,4 +1195,20 @@ state     | State name. This parameter is required.
 zip       | Zipcode. This parameter is required.
 force     | Wether the address will be forced or not (1 or 0). This parameter is not required.
 
+# Requests Dashboard
+
+## Requests List
+
+This endpoint shows a web page with the list of all requests made. To use it, you just have to send a get from any browser. The list includes the Ip, url requested, date of the request, request headers, parameters, the response sent by the api and the response code. You can search by token or filter by start and end date. Information can also be ordered by clicking the table headers. The most important requirement is that the token has to be passed as a header (Authorization:Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY1N2 ) in the web browser.
+
+Examples:
+
+Web interface
+`https://staging.api.nexogy.com/api/residential/dev-dashboard` 
+
+
+### HTTP Request
+
+`GET https://staging.api.nexogy.com/api/residential/dev-dashboard`
+
 
